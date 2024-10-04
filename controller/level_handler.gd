@@ -43,11 +43,23 @@ func _goto_level(e: mvc_event):
 	get_tree().change_scene_to_file("res://view/room/room.tscn")
 	await get_tree().tree_changed
 	
+	# 初始化移动步数
+	var move_count: mvc_proxy = Game.app.get_proxy("move_count")
+	move_count.set_data(0)
+	
 	# 初始化地板、墙壁、目标点、箱子、玩家
 	var room_grid: level_grid2d = app().get_proxy("room_map").data()
 	var box_grid: level_grid2d = app().get_proxy("box_map").data()
+	var goal_list: mvc_proxy = app().get_proxy("goal_list")
+	
 	room_grid.clear()
 	room_grid.resize(level_grid.size())
+	
+	box_grid.clear()
+	box_grid.resize(level_grid.size())
+	
+	goal_list.data().clear()
+	
 	for y in level_grid.size().y:
 		for x in level_grid.size().x:
 			var cell = Vector2(x, y)
@@ -61,6 +73,7 @@ func _goto_level(e: mvc_event):
 					room_grid.set_tile(cell, tile)
 				level_const.Tile.GOAL:
 					room_grid.set_tile(cell, tile)
+					goal_list.data().append(cell)
 				level_const.Tile.PLAYER:
 					room_grid.set_tile(cell, level_const.Tile.FLOOR)
 					var view = preload("res://view/player/player.tscn").instantiate()

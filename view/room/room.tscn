@@ -61,7 +61,7 @@ offset_left = 30.0
 offset_top = 30.0
 offset_right = 70.0
 offset_bottom = 70.0
-theme_override_constants/separation = 10
+theme_override_constants/separation = 15
 
 [node name="Back" type="Button" parent="CanvasLayer/VBoxContainer"]
 custom_minimum_size = Vector2(192, 74)
@@ -74,6 +74,16 @@ text = "退出 [ESC]"
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "当前关卡: 001"
+
+[node name="step" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "当前步数: 0"
+
+[node name="time" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "游戏时间: 00:00:00"
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 custom_minimum_size = Vector2(0, 64)
