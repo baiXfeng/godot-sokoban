@@ -4,15 +4,20 @@ extends mvc_handler
 func _on_enter(a: mvc_app):
 	a.add_callable("switch_map", _switch_map)
 	a.add_callable("goto_level", _goto_level)
+	a.add_callable("exit_level", _exit_level)
 	
 # override
 func _on_exit(a: mvc_app):
 	a.remove_callable("switch_map", _switch_map)
 	a.remove_callable("goto_level", _goto_level)
+	a.remove_callable("exit_level", _exit_level)
 	
 func _switch_map(e: mvc_event):
 	var name: String = e.data.name
 	app().get_proxy("current_map").set_data(name)
+	
+func _exit_level(e: mvc_event):
+	get_tree().change_scene_to_file("res://view/level/level_select.tscn")
 	
 func _goto_level(e: mvc_event):
 	var level: int = e.data.level
@@ -77,8 +82,9 @@ func _goto_level(e: mvc_event):
 				level_const.Tile.PLAYER:
 					room_grid.set_tile(cell, level_const.Tile.FLOOR)
 					var view = preload("res://view/player/player.tscn").instantiate()
-					var player = app().get_proxy("player")
+					var player: mvc_player = app().get_proxy("player")
 					player.set_data(view)
+					player.set_position(cell)
 					view.position = Vector3(cell.x * 2 + 1, 0, cell.y * 2 + 1)
 				level_const.Tile.BOX:
 					room_grid.set_tile(cell, level_const.Tile.FLOOR)

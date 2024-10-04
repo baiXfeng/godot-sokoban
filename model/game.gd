@@ -31,8 +31,9 @@ func _register_app():
 	app.add_proxy("goal_list", mvc_proxy.new([]))	# 目标点列表
 	app.add_proxy("player", mvc_player.new())	# 玩家
 	app.add_proxy("move_count", mvc_proxy.new(0))	# 移动步数
-	app.add_proxy("current_map", mvc_proxy.new(""))
-	app.add_proxy("current_level", mvc_proxy.new(0))
+	app.add_proxy("current_map", mvc_proxy.new(""))	# 当前地图集
+	app.add_proxy("current_level", mvc_proxy.new(0))	# 当前关
+	app.add_proxy("step_record", mvc_proxy.new([]))
 	
 	# 加载关卡
 	app.add_proxy("level:brithday", mvc_level.new("res://assets/levels/Birthday.txt"))
@@ -42,6 +43,8 @@ func _register_app():
 	# controller
 	app.add_handler("level_handler", load("res://controller/level_handler.gd").new(self))
 	app.add_handler("pushbox_handler", load("res://controller/pushbox_handler.gd").new(self))
+	app.add_handler("back_handler", load("res://controller/back_handler.gd").new(self))
+	app.add_handler("player_handler", load("res://controller/player_handler.gd").new(self))
 	
 func _unregister_app():
 	# proxy
@@ -53,6 +56,7 @@ func _unregister_app():
 	app.remove_proxy("move_count")
 	app.remove_proxy("current_map")
 	app.remove_proxy("current_level")
+	app.remove_proxy("step_record")
 	
 	# 移除关卡
 	app.remove_proxy("level:brithday")
@@ -60,6 +64,8 @@ func _unregister_app():
 	app.remove_proxy("level:696")
 	
 	# controller
+	app.remove_handler("player_handler")
+	app.remove_handler("back_handler")
 	app.remove_handler("pushbox_handler")
 	app.remove_handler("level_handler")
 	

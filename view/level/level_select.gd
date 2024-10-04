@@ -38,7 +38,6 @@ func _on_back_map_pressed() -> void:
 		"name": _list[_index],
 	})
 	_reload_level_list()
-	printt(_index, _list[_index])
 	
 func _on_next_map_pressed() -> void:
 	_index = _index + 1 if _index + 1 < _list.size() else 0
@@ -46,7 +45,6 @@ func _on_next_map_pressed() -> void:
 		"name": _list[_index],
 	})
 	_reload_level_list()
-	printt(_index, _list[_index])
 	
 static var _scroll_position: int
 	

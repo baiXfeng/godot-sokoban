@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://dql0se3sag8qj"]
+
+[ext_resource type="Script" path="res://view/room/minimap/minimap.gd" id="1_qddgf"]
+[ext_resource type="PackedScene" uid="uid://c1kqvo7eo6bn0" path="res://view/room/minimap/wall.tscn" id="2_5shjx"]
+[ext_resource type="PackedScene" uid="uid://bqmec64bpjxeh" path="res://view/room/minimap/goal.tscn" id="3_81mnc"]
+[ext_resource type="PackedScene" uid="uid://cw1rau1i4wktr" path="res://view/room/minimap/box.tscn" id="4_ejpcv"]
+[ext_resource type="PackedScene" uid="uid://b8w2pk1vf7yhf" path="res://view/room/minimap/player.tscn" id="5_7bsvr"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_4ivn3"]
+scenes/1/scene = ExtResource("2_5shjx")
+scenes/2/scene = ExtResource("3_81mnc")
+scenes/3/scene = ExtResource("4_ejpcv")
+scenes/4/scene = ExtResource("5_7bsvr")
+
+[sub_resource type="TileSet" id="TileSet_o58f8"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetScenesCollectionSource_4ivn3")
+
+[node name="Minimap" type="Control"]
+modulate = Color(1, 1, 1, 0.839216)
+custom_minimum_size = Vector2(360, 240)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1560.0
+offset_bottom = -840.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_qddgf")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.313726)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="GoalLayer" type="TileMapLayer" parent="Node2D"]
+tile_set = SubResource("TileSet_o58f8")
+
+[node name="TileLayer" type="TileMapLayer" parent="Node2D"]
+tile_set = SubResource("TileSet_o58f8")
+
+[node name="PlayerLayer" type="TileMapLayer" parent="Node2D"]
+tile_set = SubResource("TileSet_o58f8")

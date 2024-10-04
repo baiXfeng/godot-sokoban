@@ -16,16 +16,18 @@ func _physics_process(delta: float) -> void:
 	_move_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = Vector3(_move_direction.x, 0, _move_direction.y) * _speed * delta * _speed_scale
 	
-	if Input.is_action_just_pressed("run"):
+	if Input.is_action_pressed("run"):
 		_animation_player.speed_scale = 2
 		_speed_scale = 2
 	elif Input.is_action_just_released("run"):
 		_animation_player.speed_scale = 1
 		_speed_scale = 1
+	elif Input.is_action_just_pressed("backstep"):
+		Game.app.notify("back_step")
 	
 	# 计算重力影响
-	#if not is_on_floor():
-	#	velocity.y -= _gravity * delta * 52
+	if not is_on_floor():
+		velocity.y -= _gravity * delta * 40
 	
 	# 播放动画
 	if _move_direction.is_zero_approx():
@@ -78,9 +80,9 @@ func play_animation(name: String):
 func on_pause():
 	set_physics_process(false)
 	play_animation("Idle")
+	_animation_player.speed_scale = 1
+	_speed_scale = 1
 	
 func on_resume():
 	set_physics_process(true)
-	_animation_player.speed_scale = 1
-	_speed_scale = 1
 	

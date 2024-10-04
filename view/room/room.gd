@@ -61,7 +61,7 @@ func _on_map_set_tile(sender: level_grid2d, position: Vector2, tile: int):
 			_floor_layer.set_cell_item(Vector3(position.x, 0, position.y), 3)
 	
 func _on_back_pressed() -> void:
-	get_tree().change_scene_to_file("res://view/level/level_select.tscn")
+	Game.app.notify("exit_level")
 	
 func _physics_process(delta: float) -> void:
 	_seconds += delta

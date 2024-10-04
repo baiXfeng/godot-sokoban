@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccqjpbrubh270"]
+[gd_scene load_steps=11 format=3 uid="uid://ccqjpbrubh270"]
 
 [ext_resource type="Script" path="res://view/room/room.gd" id="1_5hvow"]
 [ext_resource type="MeshLibrary" uid="uid://thvujxkl1w42" path="res://assets/MeshLibrary/floor.tres" id="2_0oe0i"]
+[ext_resource type="Script" path="res://view/room/room_ui_layer.gd" id="4_g0s57"]
 [ext_resource type="MeshLibrary" uid="uid://dy8f5m5k2s6w1" path="res://assets/MeshLibrary/wall.tres" id="4_ndut3"]
+[ext_resource type="PackedScene" uid="uid://dql0se3sag8qj" path="res://view/room/minimap/minimap.tscn" id="4_ybr2b"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kyckh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -55,6 +57,7 @@ data = {
 }
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("4_g0s57")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 offset_left = 30.0
@@ -62,13 +65,6 @@ offset_top = 30.0
 offset_right = 70.0
 offset_bottom = 70.0
 theme_override_constants/separation = 15
-
-[node name="Back" type="Button" parent="CanvasLayer/VBoxContainer"]
-custom_minimum_size = Vector2(192, 74)
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-shortcut = SubResource("Shortcut_0o601")
-text = "退出 [ESC]"
 
 [node name="level" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
@@ -85,15 +81,23 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "游戏时间: 00:00:00"
 
+[node name="Back" type="Button" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(192, 74)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+shortcut = SubResource("Shortcut_0o601")
+text = "退出 [ESC]"
+
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 custom_minimum_size = Vector2(0, 64)
-anchors_preset = -1
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_bottom = -60.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 color = Color(0, 0, 0, 0.313726)
 
 [node name="Label" type="Label" parent="CanvasLayer/ColorRect"]
@@ -107,5 +111,40 @@ theme_override_font_sizes/font_size = 32
 text = "[WSAD 上下左右]  [SPACE 加速] [M 地图]  [BACKSPACE 回退]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Minimap" parent="CanvasLayer" instance=ExtResource("4_ybr2b")]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = -320.0
+offset_top = 40.0
+offset_right = -40.0
+offset_bottom = 200.0
+grow_horizontal = 0
+grow_vertical = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/CenterContainer"]
+layout_mode = 2
+
+[node name="Minimap" parent="CanvasLayer/CenterContainer/Control" instance=ExtResource("4_ybr2b")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -360.0
+offset_top = -240.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 1
+scale = Vector2(2, 2)
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Back" to="." method="_on_back_pressed"]

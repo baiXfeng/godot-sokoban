@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cw1rau1i4wktr"]
+
+[node name="Box" type="ColorRect"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(1, 1, 0.360784, 1)

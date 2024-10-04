@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bqmec64bpjxeh"]
+
+[node name="Goal" type="ColorRect"]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+color = Color(1, 0.243137, 0.196078, 1)

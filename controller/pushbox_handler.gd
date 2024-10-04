@@ -40,6 +40,12 @@ func _pushbox(e: mvc_event):
 	var move_count: mvc_proxy = Game.app.get_proxy("move_count")
 	move_count.set_data( move_count.data() + 1 )
 	
+	# 箱子移动记录
+	notify("record_step", {
+		"from": curr_cell,
+		"to": next_cell,
+	})
+	
 	# 角色硬直
 	player.on_pause()
 	await box.move_direction(dir).on_move_finished
