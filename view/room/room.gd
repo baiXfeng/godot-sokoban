@@ -4,6 +4,8 @@ extends Node3D
 @onready var _box_layer = $Box
 @onready var _wall_layer = $Wall
 
+@onready var _level = $CanvasLayer/VBoxContainer/level
+
 func _ready() -> void:
 	# 监听箱子创建
 	var box_grid: level_grid2d = Game.app.get_proxy("box_map").data()
@@ -16,6 +18,10 @@ func _ready() -> void:
 	# 监听地图初始化
 	var room_grid: level_grid2d = Game.app.get_proxy("room_map").data()
 	room_grid.on_set_tile.connect(_on_map_set_tile)
+	
+	# 设置当前关卡号
+	var current_level: mvc_proxy = Game.app.get_proxy("current_level")
+	_level.text = "当前关卡: %03d" % current_level.data()
 	
 	_floor_layer.clear()
 	_box_layer.clear()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bv434clg4etl0"]
+[gd_scene load_steps=7 format=3 uid="uid://bv434clg4etl0"]
 
 [ext_resource type="Script" path="res://view/level/level_select.gd" id="1_yjf0n"]
 [ext_resource type="Texture2D" uid="uid://dihew1duuegut" path="res://view/level/images/Box_Blue_Square.png" id="2_5ows8"]
 [ext_resource type="Texture2D" uid="uid://dnwfch36owiwp" path="res://view/level/images/Banner_Blue.png" id="3_tlrg5"]
 [ext_resource type="Texture2D" uid="uid://cs6kstjxnlkba" path="res://view/level/images/IconButton_Small_Red_Circle.png" id="4_2w36u"]
+[ext_resource type="Texture2D" uid="uid://c5812gst06fud" path="res://view/level/images/Icon_Small_Blank_Arrow.png" id="4_qvhmn"]
 [ext_resource type="Texture2D" uid="uid://squnbitckjrt" path="res://view/level/images/Icon_Small_Blank_X.png" id="5_8xumt"]
 
 [node name="LevelSelect" type="Control"]
@@ -58,6 +59,7 @@ theme_override_constants/margin_bottom = 60
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/NinePatchRect/MarginContainer"]
 layout_mode = 2
+horizontal_scroll_mode = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/NinePatchRect/MarginContainer/ScrollContainer"]
 layout_mode = 2
@@ -91,10 +93,27 @@ anchor_bottom = 1.0
 offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 80
 text = "关卡选择"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Back" type="TextureButton" parent="MarginContainer/NinePatchRect/TextureRect"]
+layout_mode = 0
+offset_left = -118.0
+offset_top = 49.0
+offset_right = 50.0
+offset_bottom = 203.0
+texture_normal = ExtResource("4_qvhmn")
+flip_h = true
+
+[node name="Next" type="TextureButton" parent="MarginContainer/NinePatchRect/TextureRect"]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 45.0
+offset_right = 728.0
+offset_bottom = 199.0
+texture_normal = ExtResource("4_qvhmn")
 
 [node name="Close" type="TextureButton" parent="MarginContainer/NinePatchRect"]
 layout_mode = 0
@@ -118,4 +137,7 @@ grow_vertical = 2
 layout_mode = 2
 texture = ExtResource("5_8xumt")
 
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
+[connection signal="pressed" from="MarginContainer/NinePatchRect/TextureRect/Back" to="." method="_on_back_map_pressed"]
+[connection signal="pressed" from="MarginContainer/NinePatchRect/TextureRect/Next" to="." method="_on_next_map_pressed"]
 [connection signal="pressed" from="MarginContainer/NinePatchRect/Close" to="." method="_on_close_pressed"]

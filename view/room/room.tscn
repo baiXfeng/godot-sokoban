@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccqjpbrubh270"]
+[gd_scene load_steps=9 format=3 uid="uid://ccqjpbrubh270"]
 
 [ext_resource type="Script" path="res://view/room/room.gd" id="1_5hvow"]
 [ext_resource type="MeshLibrary" uid="uid://thvujxkl1w42" path="res://assets/MeshLibrary/floor.tres" id="2_0oe0i"]
@@ -16,6 +16,13 @@ background_mode = 2
 sky = SubResource("Sky_7ikse")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="InputEventKey" id="InputEventKey_kjrrn"]
+pressed = true
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_0o601"]
+events = [SubResource("InputEventKey_kjrrn")]
 
 [node name="Room" type="Node3D"]
 script = ExtResource("1_5hvow")
@@ -49,12 +56,46 @@ data = {
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Back" type="Button" parent="CanvasLayer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 offset_left = 30.0
 offset_top = 30.0
-offset_right = 150.0
-offset_bottom = 94.0
-theme_override_font_sizes/font_size = 32
-text = "退出"
+offset_right = 70.0
+offset_bottom = 70.0
+theme_override_constants/separation = 10
 
-[connection signal="pressed" from="CanvasLayer/Back" to="." method="_on_back_pressed"]
+[node name="Back" type="Button" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(192, 74)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+shortcut = SubResource("Shortcut_0o601")
+text = "退出 [ESC]"
+
+[node name="level" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "当前关卡: 001"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 64)
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 0.313726)
+
+[node name="Label" type="Label" parent="CanvasLayer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "[WSAD 上下左右]  [SPACE 加速] [M 地图]  [BACKSPACE 回退]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Back" to="." method="_on_back_pressed"]

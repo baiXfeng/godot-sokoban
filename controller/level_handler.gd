@@ -2,21 +2,38 @@ extends mvc_handler
 
 # override
 func _on_enter(a: mvc_app):
+	a.add_callable("switch_map", _switch_map)
 	a.add_callable("goto_level", _goto_level)
 	
 # override
 func _on_exit(a: mvc_app):
+	a.remove_callable("switch_map", _switch_map)
 	a.remove_callable("goto_level", _goto_level)
+	
+func _switch_map(e: mvc_event):
+	var name: String = e.data.name
+	app().get_proxy("current_map").set_data(name)
 	
 func _goto_level(e: mvc_event):
 	var level: int = e.data.level
-	var level_proxy: mvc_level = app().get_proxy("level:brithday")
+	var current_map: mvc_proxy = app().get_proxy("current_map")
+	if current_map.data().is_empty():
+		return
+	
+	# 获取目标地图配置
+	var level_proxy: mvc_level = app().get_proxy(current_map.data())
+	if level_proxy == null:
+		return
 	
 	# 合法性检查
 	var level_grid = level_proxy.get_level(level)
 	if level_grid == null:
 		return
-	level_proxy.debug_print_level_data(level)
+	#level_proxy.debug_print_level_data(level)
+	
+	# 设置当前关卡号
+	var current_level: mvc_proxy = Game.app.get_proxy("current_level")
+	current_level.set_data(level)
 	
 	# 保留原始地图
 	var source_grid: level_grid2d = app().get_proxy("source_map").data()

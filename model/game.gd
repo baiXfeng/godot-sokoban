@@ -29,21 +29,30 @@ func _register_app():
 	app.add_proxy("room_map", mvc_proxy.new(level_grid2d.new()))	# 墙壁、地板、目标点
 	app.add_proxy("box_map", mvc_proxy.new(level_grid2d.new()))		# 箱子
 	app.add_proxy("player", mvc_player.new())	# 玩家
+	app.add_proxy("current_map", mvc_proxy.new(""))
+	app.add_proxy("current_level", mvc_proxy.new(0))
 	
 	# 加载关卡
 	app.add_proxy("level:brithday", mvc_level.new("res://assets/levels/Birthday.txt"))
+	app.add_proxy("level:akk", mvc_level.new("res://assets/levels/AKK_Informatika.txt"))
+	app.add_proxy("level:696", mvc_level.new("res://assets/levels/696.txt"))
 	
 	# controller
 	app.add_handler("level_handler", load("res://controller/level_handler.gd").new(self))
 	
 func _unregister_app():
 	# proxy
+	app.remove_proxy("source_map")
 	app.remove_proxy("room_map")
 	app.remove_proxy("box_map")
 	app.remove_proxy("player")
+	app.remove_proxy("current_map")
+	app.remove_proxy("current_level")
 	
 	# 移除关卡
 	app.remove_proxy("level:brithday")
+	app.remove_proxy("level:akk")
+	app.remove_proxy("level:696")
 	
 	# controller
 	app.remove_handler("level_handler")
