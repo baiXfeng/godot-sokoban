@@ -1,0 +1,2 @@
+extends mvc_proxy
+class_name mvc_player

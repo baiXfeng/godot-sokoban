@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2mfitkmgfb5d"]
+
+[ext_resource type="Texture2D" uid="uid://bx6ajwxafmpg" path="res://view/level/images/Icon_Small_StarGrey.png" id="1_vmgdx"]
+[ext_resource type="Texture2D" uid="uid://cs0turnm4idis" path="res://view/level/images/Icon_Small_Star.png" id="2_6lhod"]
+
+[sub_resource type="GDScript" id="GDScript_wygt1"]
+script/source = "@tool
+extends TextureRect
+
+@onready var _star = $TextureRect
+
+@export var highlight: bool:
+	set(v):
+		highlight = v
+		if _star:
+			_star.visible = true if highlight else false
+	
+func _ready() -> void:
+	highlight = highlight
+	
+"
+
+[node name="LevelStar" type="TextureRect"]
+custom_minimum_size = Vector2(48, 48)
+offset_right = 48.0
+offset_bottom = 48.0
+texture = ExtResource("1_vmgdx")
+expand_mode = 4
+stretch_mode = 4
+script = SubResource("GDScript_wygt1")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6lhod")
+expand_mode = 4
+stretch_mode = 4
