@@ -23,8 +23,8 @@ func _physics_process(delta: float) -> void:
 		_speed_scale = 1
 	
 	# 计算重力影响
-	if not is_on_floor():
-		velocity.y -= _gravity * delta * 52
+	#if not is_on_floor():
+	#	velocity.y -= _gravity * delta * 52
 	
 	# 播放动画
 	if direction.is_zero_approx():

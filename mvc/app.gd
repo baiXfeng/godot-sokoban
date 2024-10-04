@@ -41,7 +41,7 @@ func remove_all_proxies():
 func has_proxy(name: String) -> bool:
 	return _proxy_pool.has(name)
 	
-func get_proxy(name: String):
+func get_proxy(name: String) -> mvc_proxy:
 	if _proxy_pool.has(name):
 		return _proxy_pool[name]
 	return null

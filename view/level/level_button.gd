@@ -55,6 +55,10 @@ func _ready() -> void:
 	
 func _on_button_pressed() -> void:
 	_border.visible = false
+	# 关卡跳转
+	Game.app.notify("goto_level", {
+		"level": number,
+	})
 	
 func _on_mouse_entered() -> void:
 	_border.visible = true

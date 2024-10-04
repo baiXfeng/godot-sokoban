@@ -4,11 +4,11 @@ class_name level_grid2d
 var _data: Array
 var _size: Vector2
 
-signal on_clear
-signal on_resized
-signal on_data_copy
-signal on_set_tile
-signal on_batch_set_tile
+signal on_clear(sender: level_grid2d)
+signal on_resized(sender: level_grid2d, size: Vector2)
+signal on_data_copy(sender: level_grid2d)
+signal on_set_tile(sender: level_grid2d, position: Vector2, tile)
+signal on_batch_set_tile(sender: level_grid2d, tile_list: Array)
 
 func _init(grid_size: Vector2 = Vector2.ZERO):
 	_data = []
@@ -19,7 +19,7 @@ func resize(grid_size: Vector2):
 	if grid_size != Vector2.ZERO:
 		_data.resize(_size.x * _size.y)
 		_data.fill(null)
-	emit_signal("on_resized", self, grid_size)
+	on_resized.emit(self, grid_size)
 	
 func get_tile(pos: Vector2):
 	if _is_valid(pos):
@@ -28,14 +28,14 @@ func get_tile(pos: Vector2):
 	
 func set_tile(pos: Vector2, tile):
 	_set_value(pos, tile)
-	emit_signal("on_set_tile", self, pos, tile)
+	on_set_tile.emit(self, pos, tile)
 	
 func batch_set_tile(tile_list: Array):
 	for item in tile_list:
 		var cell: Vector2 = item[0]
 		var tile = item[1]
 		_set_value(cell, tile)
-	emit_signal("on_batch_set_tile", self, tile_list)
+	on_batch_set_tile.emit(self, tile_list)
 	
 func size():
 	return _size
@@ -49,12 +49,12 @@ func has_tile(pos: Vector2) -> bool:
 func clear():
 	_data.clear()
 	_size = Vector2.ZERO
-	emit_signal("on_clear", self)
+	on_clear.emit(self)
 	
 func copy_from(grid, deep: bool = false):
 	_data = grid._data.duplicate(deep)
 	_size = Vector2(grid._size.x, grid._size.y)
-	emit_signal("on_data_copy", self)
+	on_data_copy.emit(self)
 	
 func paste_to(grid):
 	grid.copy_from(self)

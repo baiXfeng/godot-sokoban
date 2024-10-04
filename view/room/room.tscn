@@ -1,9 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccqjpbrubh270"]
+[gd_scene load_steps=7 format=3 uid="uid://ccqjpbrubh270"]
 
 [ext_resource type="Script" path="res://view/room/room.gd" id="1_5hvow"]
 [ext_resource type="MeshLibrary" uid="uid://thvujxkl1w42" path="res://assets/MeshLibrary/floor.tres" id="2_0oe0i"]
-[ext_resource type="PackedScene" uid="uid://b6r3embowvs40" path="res://view/player/player.tscn" id="3_p15uu"]
-[ext_resource type="PackedScene" uid="uid://c6rcay0pxbp53" path="res://view/room/box.tscn" id="3_ysn86"]
 [ext_resource type="MeshLibrary" uid="uid://dy8f5m5k2s6w1" path="res://assets/MeshLibrary/wall.tres" id="4_ndut3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kyckh"]
@@ -41,9 +39,6 @@ data = {
 cell_size = Vector3(2, 0.1, 2)
 collision_mask = 0
 
-[node name="Box" parent="Box" instance=ExtResource("3_ysn86")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 18)
-
 [node name="Wall" type="GridMap" parent="."]
 mesh_library = ExtResource("4_ndut3")
 cell_size = Vector3(2, 0.1, 2)
@@ -52,8 +47,14 @@ data = {
 "cells": PackedInt32Array(10, 9, 0, 0, 14, 0, 1, 14, 0, 2, 14, 0, 3, 14, 0, 4, 14, 0, 5, 14, 0, 6, 14, 0, 7, 14, 0, 8, 14, 0, 9, 14, 0, 10, 14, 0, 11, 14, 0, 12, 14, 0, 13, 14, 0, 14, 14, 0, 15, 14, 0, 16, 14, 0, 17, 14, 0, 17, 13, 0, 17, 12, 0, 17, 11, 0, 17, 10, 0, 17, 9, 0, 17, 8, 0, 17, 7, 0, 17, 6, 0, 17, 5, 0, 17, 4, 0, 17, 3, 0, 17, 2, 0, 17, 1, 0, 17, 0, 0, 16, 0, 0, 15, 0, 0, 14, 0, 0, 13, 0, 0, 12, 0, 0, 11, 0, 0, 10, 0, 0, 9, 0, 0, 8, 0, 0, 7, 0, 0, 6, 0, 0, 5, 0, 0, 4, 0, 0, 3, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0)
 }
 
-[node name="Player" parent="." instance=ExtResource("3_p15uu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 14)
-collision_layer = 0
-collision_mask = 1
-velocity = Vector3(0, -2139.95, 0)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Back" type="Button" parent="CanvasLayer"]
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 150.0
+offset_bottom = 94.0
+theme_override_font_sizes/font_size = 32
+text = "退出"
+
+[connection signal="pressed" from="CanvasLayer/Back" to="." method="_on_back_pressed"]
