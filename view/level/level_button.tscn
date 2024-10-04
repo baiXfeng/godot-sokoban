@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://disp5ifq7freh"]
+[gd_scene load_steps=7 format=3 uid="uid://disp5ifq7freh"]
 
 [ext_resource type="Script" path="res://view/level/level_button.gd" id="1_dcte5"]
 [ext_resource type="Texture2D" uid="uid://dloiuv1c1hhvh" path="res://view/level/images/IconButton_Large_Orange_Square.png" id="2_mj0lx"]
 [ext_resource type="PackedScene" uid="uid://d2mfitkmgfb5d" path="res://view/level/level_star.tscn" id="3_2okiv"]
 [ext_resource type="Texture2D" uid="uid://jlu8sybhb6rx" path="res://view/level/images/Icon_Small_Lock.png" id="4_0jkyl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4wlgn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v44kg"]
 
 [node name="LevelButton" type="Control"]
 custom_minimum_size = Vector2(128, 128)
@@ -41,6 +45,18 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+border_color = Color(1, 1, 1, 1)
+border_width = 2.0
+editor_only = false
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 visible = false
 layout_mode = 1
@@ -71,3 +87,18 @@ offset_bottom = 108.0
 texture = ExtResource("4_0jkyl")
 expand_mode = 4
 stretch_mode = 4
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_4wlgn")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_v44kg")
+flat = true
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

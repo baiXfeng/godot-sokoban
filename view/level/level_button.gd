@@ -4,6 +4,7 @@ extends Control
 @onready var _number = $Label
 @onready var _star_container = $HBoxContainer
 @onready var _lock = $TextureRect2
+@onready var _border = $ReferenceRect
 
 @export var number: int:
 	set(v):
@@ -28,7 +29,6 @@ func set_number(v: int):
 	
 func set_star(v: int):
 	var list = _star_container
-	printt("星级:", v)
 	match v:
 		1:
 			for i in 3:
@@ -52,4 +52,13 @@ func _ready() -> void:
 	number = number
 	star = star
 	lock = lock
+	
+func _on_button_pressed() -> void:
+	_border.visible = false
+	
+func _on_mouse_entered() -> void:
+	_border.visible = true
+	
+func _on_mouse_exited() -> void:
+	_border.visible = false
 	
