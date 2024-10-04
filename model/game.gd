@@ -2,6 +2,8 @@ extends Node
 
 var app: mvc_app = mvc_app.new()
 
+signal on_level_load_completed
+
 # =============================================================================
 # public
 func add_process(event_name: String):
@@ -10,9 +12,19 @@ func add_process(event_name: String):
 func remove_process(event_name: String) -> bool:
 	return _process_map.erase(event_name)
 	
+func get_level_proxy_keys() -> Array[String]:
+	var result: Array[String]
+	for file in _get_level_filenames() as Array[String]:
+		result.append("level:%s" % file)
+	return result
+	
+func is_level_loaded() -> bool:
+	return _level_loaded
+	
 # =============================================================================
 # private
 var _process_map: Dictionary
+var _level_loaded: bool
 	
 func _ready() -> void:
 	_register_app()
@@ -35,16 +47,18 @@ func _register_app():
 	app.add_proxy("current_level", mvc_proxy.new(0))	# 当前关
 	app.add_proxy("step_record", mvc_proxy.new([]))
 	
-	# 加载关卡
-	app.add_proxy("level:brithday", mvc_level.new("res://assets/levels/Birthday.txt"))
-	app.add_proxy("level:akk", mvc_level.new("res://assets/levels/AKK_Informatika.txt"))
-	app.add_proxy("level:696", mvc_level.new("res://assets/levels/696.txt"))
-	
 	# controller
 	app.add_handler("level_handler", load("res://controller/level_handler.gd").new(self))
 	app.add_handler("pushbox_handler", load("res://controller/pushbox_handler.gd").new(self))
 	app.add_handler("back_handler", load("res://controller/back_handler.gd").new(self))
 	app.add_handler("player_handler", load("res://controller/player_handler.gd").new(self))
+	
+	# 延时加载关卡配置
+	await get_tree().process_frame
+	for file in _get_level_filenames() as Array[String]:
+		app.add_proxy("level:%s" % file, mvc_level.new("res://assets/levels/%s" % file))
+	on_level_load_completed.emit()
+	_level_loaded = true
 	
 func _unregister_app():
 	# proxy
@@ -59,13 +73,19 @@ func _unregister_app():
 	app.remove_proxy("step_record")
 	
 	# 移除关卡
-	app.remove_proxy("level:brithday")
-	app.remove_proxy("level:akk")
-	app.remove_proxy("level:696")
+	for file in _get_level_filenames() as Array[String]:
+		app.remove_proxy("level:%s" % file)
 	
 	# controller
 	app.remove_handler("player_handler")
 	app.remove_handler("back_handler")
 	app.remove_handler("pushbox_handler")
 	app.remove_handler("level_handler")
+	
+func _get_level_filenames() -> Array[String]:
+	var dir = DirAccess.open("res://assets/levels")
+	var result: Array[String]
+	if dir:
+		result.append_array(dir.get_files())
+	return result
 	

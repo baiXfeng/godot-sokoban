@@ -6,10 +6,13 @@ extends Control
 
 var button_class = preload("res://view/level/level_button.tscn")
 
-var _list = ["level:akk", "level:brithday", "level:696"]
+var _list = []
 static var _index = 0
 
 func _ready() -> void:
+	if not Game.is_level_loaded():
+		await Game.on_level_load_completed
+	_list = Game.get_level_proxy_keys()
 	Game.app.notify("switch_map", {
 		"name": _list[_index],
 	})
