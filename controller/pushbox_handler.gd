@@ -37,7 +37,7 @@ func _pushbox(e: mvc_event):
 	box_grid.set_tile(next_cell, box)
 	
 	# 更新移动步数
-	var move_count: mvc_proxy = Game.app.get_proxy("move_count")
+	var move_count: mvc_proxy = app().get_proxy("move_count")
 	move_count.set_data( move_count.data() + 1 )
 	
 	# 箱子移动记录
@@ -62,4 +62,11 @@ func _pushbox(e: mvc_event):
 	get_tree().current_scene.add_child(win_scene)
 	get_tree().current_scene.set_physics_process(false)
 	player.on_pause()
+	
+	# 星级存档
+	var gd: game_data = app().get_proxy("game_data")
+	var current_map: mvc_proxy = app().get_proxy("current_map")
+	var current_level: mvc_proxy = app().get_proxy("current_level")
+	gd.set_level_star(current_map.data(), current_level.data(), 3)
+	notify.call_deferred("save_game")
 	

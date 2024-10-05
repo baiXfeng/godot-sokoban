@@ -42,7 +42,7 @@ func _back_step(e: mvc_event):
 	list.data().pop_back()
 	
 	# 更新移动步数
-	var move_count: mvc_proxy = Game.app.get_proxy("move_count")
+	var move_count: mvc_proxy = app().get_proxy("move_count")
 	move_count.set_data( move_count.data() + 1 )
 	
 	# 更新箱子位置

@@ -41,8 +41,14 @@ func _goto_level(e: mvc_event):
 	#level_proxy.debug_print_level_data(level)
 	
 	# 设置当前关卡号
-	var current_level: mvc_proxy = Game.app.get_proxy("current_level")
+	var current_level: mvc_proxy = app().get_proxy("current_level")
 	current_level.set_data(level)
+	
+	# 保存最大关卡数
+	var gd: game_data = app().get_proxy("game_data")
+	if level + 1 > gd.get_level_max(current_map.data()):
+		gd.set_level_max(current_map.data(), level + 1)
+		notify.call_deferred("save_game")
 	
 	# 保留原始地图
 	var source_grid: level_grid2d = app().get_proxy("source_map").data()
@@ -53,7 +59,7 @@ func _goto_level(e: mvc_event):
 	await get_tree().tree_changed
 	
 	# 初始化移动步数
-	var move_count: mvc_proxy = Game.app.get_proxy("move_count")
+	var move_count: mvc_proxy = app().get_proxy("move_count")
 	move_count.set_data(0)
 	
 	# 初始化地板、墙壁、目标点、箱子、玩家
@@ -97,7 +103,7 @@ func _goto_level(e: mvc_event):
 					view.position = Vector3(cell.x * 2, 0, cell.y * 2)
 	
 func _retry_level(e: mvc_event):
-	var current_level: mvc_proxy = Game.app.get_proxy("current_level")
+	var current_level: mvc_proxy = app().get_proxy("current_level")
 	notify("goto_level", {
 		"level": current_level.data() as int,
 	})
@@ -113,7 +119,7 @@ func _next_level(e: mvc_event):
 		return
 	
 	# 当前关卡号
-	var current_level: mvc_proxy = Game.app.get_proxy("current_level")
+	var current_level: mvc_proxy = app().get_proxy("current_level")
 	if current_level.data() + 1 < level_proxy.get_level_max():
 		notify("goto_level", {
 			"level": (current_level.data() + 1) as int,

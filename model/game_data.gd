@@ -16,13 +16,14 @@ func get_level_max(key: String) -> int:
 func set_level_star(key: String, level: int, star: int):
 	var d = _get_map_data(key)
 	var star_map = d["star_map"] as Dictionary
-	star_map[level] = star
+	star_map[str(level)] = star
 	
 func get_level_star(key: String, level: int) -> int:
 	var d = _get_map_data(key)
 	var star_map = d["star_map"] as Dictionary
-	if star_map.has(level):
-		return star_map[level]
+	var star_key = str(level)
+	if star_map.has(star_key):
+		return star_map[star_key]
 	return 0
 	
 func _get_map_data(key: String) -> Dictionary:
