@@ -10,7 +10,7 @@ extends Control
 @export var star: int:
 	set(v):
 		star = v
-		if _star_list[0]:
+		if _star_list and _star_list[0]:
 			set_star(star)
 	
 func set_star(v: int):

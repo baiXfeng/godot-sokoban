@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bv434clg4etl0"]
+[gd_scene load_steps=8 format=3 uid="uid://bv434clg4etl0"]
 
+[ext_resource type="Theme" uid="uid://cek4udsfjd4md" path="res://assets/theme/cn_font_theme.theme" id="1_lahaq"]
 [ext_resource type="Script" path="res://view/level/level_select.gd" id="1_yjf0n"]
 [ext_resource type="Texture2D" uid="uid://dihew1duuegut" path="res://view/level/images/Box_Blue_Square.png" id="2_5ows8"]
 [ext_resource type="Texture2D" uid="uid://dnwfch36owiwp" path="res://view/level/images/Banner_Blue.png" id="3_tlrg5"]
@@ -14,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_lahaq")
 script = ExtResource("1_yjf0n")
 
 [node name="ColorRect" type="ColorRect" parent="."]

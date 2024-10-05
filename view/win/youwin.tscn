@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbabiimkmv5ai"]
+[gd_scene load_steps=11 format=3 uid="uid://bbabiimkmv5ai"]
 
+[ext_resource type="Theme" uid="uid://cek4udsfjd4md" path="res://assets/theme/cn_font_theme.theme" id="1_604qj"]
 [ext_resource type="Texture2D" uid="uid://bifjwqphih5gn" path="res://view/win/images/Box_Orange_Rounded.png" id="1_etpsv"]
 [ext_resource type="Script" path="res://view/win/youwin.gd" id="1_hke56"]
 [ext_resource type="Texture2D" uid="uid://xn02l48wb5me" path="res://view/win/images/PremadeButtons_XRed.png" id="2_biqeo"]
@@ -17,7 +18,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_604qj")
 script = ExtResource("1_hke56")
+star = 3
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -107,6 +110,7 @@ size_flags_vertical = 3
 
 [node name="LevelStar" parent="CenterContainer/ResultBox/NinePatchRect/HBoxContainer/VBoxContainer" instance=ExtResource("6_h771a")]
 layout_mode = 2
+highlight = true
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/ResultBox/NinePatchRect/HBoxContainer"]
 custom_minimum_size = Vector2(180, 0)
@@ -120,6 +124,7 @@ size_flags_vertical = 3
 [node name="LevelStar" parent="CenterContainer/ResultBox/NinePatchRect/HBoxContainer/VBoxContainer2" instance=ExtResource("6_h771a")]
 custom_minimum_size = Vector2(64, 48)
 layout_mode = 2
+highlight = true
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="CenterContainer/ResultBox/NinePatchRect/HBoxContainer"]
 layout_mode = 2
@@ -131,6 +136,7 @@ size_flags_vertical = 3
 
 [node name="LevelStar" parent="CenterContainer/ResultBox/NinePatchRect/HBoxContainer/VBoxContainer3" instance=ExtResource("6_h771a")]
 layout_mode = 2
+highlight = true
 
 [node name="Retry" type="TextureButton" parent="CenterContainer/ResultBox"]
 layout_mode = 0

@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://ccqjpbrubh270"]
+[gd_scene load_steps=12 format=3 uid="uid://ccqjpbrubh270"]
 
 [ext_resource type="Script" path="res://view/room/room.gd" id="1_5hvow"]
 [ext_resource type="MeshLibrary" uid="uid://thvujxkl1w42" path="res://assets/MeshLibrary/floor.tres" id="2_0oe0i"]
 [ext_resource type="Script" path="res://view/room/room_ui_layer.gd" id="4_g0s57"]
 [ext_resource type="MeshLibrary" uid="uid://dy8f5m5k2s6w1" path="res://assets/MeshLibrary/wall.tres" id="4_ndut3"]
 [ext_resource type="PackedScene" uid="uid://dql0se3sag8qj" path="res://view/room/minimap/minimap.tscn" id="4_ybr2b"]
+[ext_resource type="Theme" uid="uid://cek4udsfjd4md" path="res://assets/theme/cn_font_theme.theme" id="5_qb6gu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kyckh"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -64,7 +65,8 @@ offset_left = 30.0
 offset_top = 30.0
 offset_right = 70.0
 offset_bottom = 70.0
-theme_override_constants/separation = 15
+theme = ExtResource("5_qb6gu")
+theme_override_constants/separation = 25
 
 [node name="level" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
@@ -98,6 +100,7 @@ offset_bottom = -60.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
+theme = ExtResource("5_qb6gu")
 color = Color(0, 0, 0, 0.313726)
 
 [node name="Label" type="Label" parent="CanvasLayer/ColorRect"]

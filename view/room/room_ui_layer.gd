@@ -12,14 +12,14 @@ func _physics_process(delta: float) -> void:
 			_map2.pivot_offset = _map2.custom_minimum_size * 0.5
 			if _map2.size.x > _map2.size.y:
 				# 宽地图
-				var scale = get_viewport().size.y * 0.8 / _map2.size.x
+				var scale = 1080 * 0.8 / _map2.size.x
 				_map2.scale = Vector2(scale, scale)
 			elif _map2.size.x < _map2.size.y:
 				# 高地图
-				var scale = get_viewport().size.y * 0.7 / _map2.size.y
+				var scale = 1080 * 0.7 / _map2.size.y
 				_map2.scale = Vector2(scale, scale)
 			else:
-				var scale = get_viewport().size.y * 0.75 / _map2.size.y
+				var scale = 1080 * 0.75 / _map2.size.y
 				_map2.scale = Vector2(scale, scale)
 		elif _map2.visible:
 			_map2.visible = false
