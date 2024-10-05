@@ -55,6 +55,9 @@ func _ready() -> void:
 	
 func _on_button_pressed() -> void:
 	_border.visible = false
+	# 未解锁不能进入
+	if lock:
+		return
 	# 关卡跳转
 	Game.app.notify("goto_level", {
 		"level": number,

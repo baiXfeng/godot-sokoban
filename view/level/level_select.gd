@@ -25,11 +25,14 @@ func _reload_level_list():
 	for node in _grid_container.get_children() as Array[Node]:
 		node.queue_free()
 	var level: mvc_level = Game.app.get_proxy(_list[_index])
+	var gd: game_data = Game.app.get_proxy("game_data")
+	var max_level: int = gd.get_level_max(_list[_index])
 	for i in level.get_level_max():
 		var view = button_class.instantiate()
 		_grid_container.add_child(view)
 		view.number = i + 1
-		view.lock = false
+		view.star = gd.get_level_star(_list[_index], i + 1)
+		view.lock = true if i >= max_level else false
 	_title.text = "关卡选择(%d)" % level.get_level_max()
 	
 func _on_close_pressed() -> void:

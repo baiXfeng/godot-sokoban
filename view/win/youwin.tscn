@@ -1,0 +1,181 @@
+[gd_scene load_steps=10 format=3 uid="uid://bbabiimkmv5ai"]
+
+[ext_resource type="Texture2D" uid="uid://bifjwqphih5gn" path="res://view/win/images/Box_Orange_Rounded.png" id="1_etpsv"]
+[ext_resource type="Script" path="res://view/win/youwin.gd" id="1_hke56"]
+[ext_resource type="Texture2D" uid="uid://xn02l48wb5me" path="res://view/win/images/PremadeButtons_XRed.png" id="2_biqeo"]
+[ext_resource type="Texture2D" uid="uid://b74ies5pwtu0" path="res://view/win/images/PremadeButtons_XWhiteOutline.png" id="3_2fxry"]
+[ext_resource type="Texture2D" uid="uid://w8kwx7gewd1w" path="res://view/win/images/Banner_Orange.png" id="4_mffw6"]
+[ext_resource type="Texture2D" uid="uid://hj67meewr5n8" path="res://view/win/images/IconButton_Large_Orange_Square.png" id="5_afk0x"]
+[ext_resource type="PackedScene" uid="uid://d2mfitkmgfb5d" path="res://view/level/level_star.tscn" id="6_h771a"]
+[ext_resource type="Texture2D" uid="uid://dyaj55432nsvc" path="res://view/win/images/ButtonText_Large_Orange_Round.png" id="8_2rcsk"]
+[ext_resource type="Texture2D" uid="uid://bb6pryws61dk8" path="res://view/win/images/ButtonText_Large_Green_Round.png" id="9_slgih"]
+
+[node name="Youwin" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hke56")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.470588)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResultBox" type="TextureRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(620, 0)
+layout_mode = 2
+texture = ExtResource("1_etpsv")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="Close" type="TextureButton" parent="CenterContainer/ResultBox"]
+layout_mode = 0
+offset_left = 525.0
+offset_top = -27.0
+offset_right = 791.0
+offset_bottom = 240.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("2_biqeo")
+texture_pressed = ExtResource("3_2fxry")
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/ResultBox"]
+layout_mode = 0
+offset_left = 126.0
+offset_top = -55.0
+offset_right = 496.0
+offset_bottom = 93.4548
+texture = ExtResource("4_mffw6")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="CenterContainer/ResultBox/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -24.4548
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "你赢了!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/ResultBox"]
+self_modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 0
+offset_left = 100.0
+offset_top = 127.0
+offset_right = 526.0
+offset_bottom = 282.0
+texture = ExtResource("5_afk0x")
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/ResultBox/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/ResultBox/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="CenterContainer/ResultBox/NinePatchRect/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LevelStar" parent="CenterContainer/ResultBox/NinePatchRect/HBoxContainer/VBoxContainer" instance=ExtResource("6_h771a")]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/ResultBox/NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="CenterContainer/ResultBox/NinePatchRect/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LevelStar" parent="CenterContainer/ResultBox/NinePatchRect/HBoxContainer/VBoxContainer2" instance=ExtResource("6_h771a")]
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CenterContainer/ResultBox/NinePatchRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="CenterContainer/ResultBox/NinePatchRect/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LevelStar" parent="CenterContainer/ResultBox/NinePatchRect/HBoxContainer/VBoxContainer3" instance=ExtResource("6_h771a")]
+layout_mode = 2
+
+[node name="Retry" type="TextureButton" parent="CenterContainer/ResultBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 423.0
+offset_right = 1175.0
+offset_bottom = 781.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("8_2rcsk")
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="CenterContainer/ResultBox/Retry"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 160
+text = "重玩本关"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Retry2" type="TextureButton" parent="CenterContainer/ResultBox"]
+layout_mode = 0
+offset_left = 318.0
+offset_top = 423.0
+offset_right = 1477.0
+offset_bottom = 781.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("9_slgih")
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="CenterContainer/ResultBox/Retry2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 160
+text = "下一关"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CenterContainer/ResultBox/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="CenterContainer/ResultBox/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="CenterContainer/ResultBox/Retry2" to="." method="_on_retry_2_pressed"]

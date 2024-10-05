@@ -5,12 +5,16 @@ func _on_enter(a: mvc_app):
 	a.add_callable("switch_map", _switch_map)
 	a.add_callable("goto_level", _goto_level)
 	a.add_callable("exit_level", _exit_level)
+	a.add_callable("retry_level", _retry_level)
+	a.add_callable("next_level", _next_level)
 	
 # override
 func _on_exit(a: mvc_app):
 	a.remove_callable("switch_map", _switch_map)
 	a.remove_callable("goto_level", _goto_level)
 	a.remove_callable("exit_level", _exit_level)
+	a.remove_callable("retry_level", _retry_level)
+	a.remove_callable("next_level", _next_level)
 	
 func _switch_map(e: mvc_event):
 	var name: String = e.data.name
@@ -91,4 +95,29 @@ func _goto_level(e: mvc_event):
 					var view = preload("res://view/room/box.tscn").instantiate()
 					box_grid.set_tile(cell, view)
 					view.position = Vector3(cell.x * 2, 0, cell.y * 2)
+	
+func _retry_level(e: mvc_event):
+	var current_level: mvc_proxy = Game.app.get_proxy("current_level")
+	notify("goto_level", {
+		"level": current_level.data() as int,
+	})
+	
+func _next_level(e: mvc_event):
+	var current_map: mvc_proxy = app().get_proxy("current_map")
+	if current_map.data().is_empty():
+		return
+	
+	# 获取目标地图配置
+	var level_proxy: mvc_level = app().get_proxy(current_map.data())
+	if level_proxy == null:
+		return
+	
+	# 当前关卡号
+	var current_level: mvc_proxy = Game.app.get_proxy("current_level")
+	if current_level.data() + 1 < level_proxy.get_level_max():
+		notify("goto_level", {
+			"level": (current_level.data() + 1) as int,
+		})
+	else:
+		notify("exit_level")
 	

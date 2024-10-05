@@ -58,5 +58,8 @@ func _pushbox(e: mvc_event):
 			return
 	
 	# 获得胜利
-	printt("胜利")
+	var win_scene = preload("res://view/win/youwin.tscn").instantiate()
+	get_tree().current_scene.add_child(win_scene)
+	get_tree().current_scene.set_physics_process(false)
+	player.on_pause()
 	
