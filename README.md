@@ -1,5 +1,5 @@
 # godot-sokoban
-Push box 3d game developed using godot.
+Push box 3d game developed using godot and mvc.
 
 ![screenshot](assets/screenshot/1.jpg)
 
