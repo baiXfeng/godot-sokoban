@@ -19,7 +19,7 @@ func _on_exit_level(e: mvc_event):
 	Game.remove_process("on_player_process")
 	
 func _on_player_process(e: mvc_event):
-	var player: mvc_player = app().get_proxy("player")
+	var player: mvc_player = get_proxy("player")
 	if player.data() == null:
 		return
 	

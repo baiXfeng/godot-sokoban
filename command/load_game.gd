@@ -8,6 +8,6 @@ func _on_execute(e: mvc_event):
 		return
 	
 	# 加载存档
-	var gd: game_data = app().get_proxy("game_data")
+	var gd: game_data = get_proxy("game_data")
 	gd.load(save_data.data())
 	

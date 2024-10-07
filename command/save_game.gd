@@ -3,7 +3,7 @@ extends mvc_command
 # override
 func _on_execute(e: mvc_event):
 	# 获取存档数据
-	var gd: game_data = app().get_proxy("game_data")
+	var gd: game_data = get_proxy("game_data")
 	var data: Dictionary
 	gd.save(data)
 	

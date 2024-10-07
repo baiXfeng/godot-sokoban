@@ -18,7 +18,7 @@ func _pushbox(e: mvc_event):
 		return
 	
 	# 判断箱子前方是否有障碍
-	var box_grid: level_grid2d = app().get_proxy("box_map").data()
+	var box_grid: level_grid2d = get_proxy("box_map").data()
 	var curr_cell: Vector2 = box.get_cell()
 	var next_cell: Vector2 = curr_cell + dir
 	
@@ -28,7 +28,7 @@ func _pushbox(e: mvc_event):
 		return
 	
 	# 前方有墙壁
-	var room_grid: level_grid2d = app().get_proxy("room_map").data()
+	var room_grid: level_grid2d = get_proxy("room_map").data()
 	if room_grid.has_tile(next_cell) and room_grid.get_tile(next_cell) == level_const.Tile.WALL:
 		return
 	
@@ -37,7 +37,7 @@ func _pushbox(e: mvc_event):
 	box_grid.set_tile(next_cell, box)
 	
 	# 更新移动步数
-	var move_count: mvc_proxy = app().get_proxy("move_count")
+	var move_count: mvc_proxy = get_proxy("move_count")
 	move_count.set_data( move_count.data() + 1 )
 	
 	# 箱子移动记录
@@ -52,7 +52,7 @@ func _pushbox(e: mvc_event):
 	player.on_resume()
 	
 	# 判断胜利
-	var goal_list: Array = app().get_proxy("goal_list").data()
+	var goal_list: Array = get_proxy("goal_list").data()
 	for cell in goal_list:
 		if not box_grid.has_tile(cell):
 			return
@@ -64,9 +64,9 @@ func _pushbox(e: mvc_event):
 	player.on_pause()
 	
 	# 星级存档
-	var gd: game_data = app().get_proxy("game_data")
-	var current_map: mvc_proxy = app().get_proxy("current_map")
-	var current_level: mvc_proxy = app().get_proxy("current_level")
+	var gd: game_data = get_proxy("game_data")
+	var current_map: mvc_proxy = get_proxy("current_map")
+	var current_level: mvc_proxy = get_proxy("current_level")
 	gd.set_level_star(current_map.data(), current_level.data(), 3)
 	notify.call_deferred("save_game")
 	
