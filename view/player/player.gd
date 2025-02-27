@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 		_animation_player.speed_scale = 1
 		_speed_scale = 1
 	elif Input.is_action_just_pressed("backstep"):
-		Game.app.notify("back_step")
+		Game.app.notify("BackStep")
 	
 	# 计算重力影响
 	if not is_on_floor():

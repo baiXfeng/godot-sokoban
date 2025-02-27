@@ -1,5 +1,5 @@
-extends mvc_proxy
-class_name mvc_player
+extends MVCProxy
+class_name MVCPlayer
 
 signal on_position_changed(sender, position)
 

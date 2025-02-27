@@ -1,14 +1,14 @@
 extends RefCounted
-class_name level_grid2d
+class_name LevelGrid2d
 
 var _data: Array
 var _size: Vector2
 
-signal on_clear(sender: level_grid2d)
-signal on_resized(sender: level_grid2d, size: Vector2)
-signal on_data_copy(sender: level_grid2d)
-signal on_set_tile(sender: level_grid2d, position: Vector2, tile)
-signal on_batch_set_tile(sender: level_grid2d, tile_list: Array)
+signal on_clear(sender: LevelGrid2d)
+signal on_resized(sender: LevelGrid2d, size: Vector2)
+signal on_data_copy(sender: LevelGrid2d)
+signal on_set_tile(sender: LevelGrid2d, position: Vector2, tile)
+signal on_batch_set_tile(sender: LevelGrid2d, tile_list: Array)
 
 func _init(grid_size: Vector2 = Vector2.ZERO):
 	_data = []

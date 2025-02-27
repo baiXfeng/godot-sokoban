@@ -17,15 +17,15 @@ var _last_player_position: Vector2
 
 func _ready() -> void:
 	# 监听箱子创建
-	var box_grid: level_grid2d = Game.app.get_proxy("box_map").data()
+	var box_grid: LevelGrid2d = Game.app.get_proxy("box_map").data()
 	box_grid.on_set_tile.connect(_on_add_box)
 	
 	# 监听玩家创建
-	var player_proxy: mvc_player = Game.app.get_proxy("player")
+	var player_proxy: MVCPlayer = Game.app.get_proxy("player")
 	player_proxy.on_position_changed.connect(_on_player_position_chaanged)
 	
 	# 监听地图初始化
-	var room_grid: level_grid2d = Game.app.get_proxy("room_map").data()
+	var room_grid: LevelGrid2d = Game.app.get_proxy("room_map").data()
 	room_grid.on_set_tile.connect(_on_map_set_tile)
 	
 	await get_tree().create_timer(0.05).timeout
@@ -36,7 +36,7 @@ func _ready() -> void:
 	var rect = get_viewport_rect()
 	position = Vector2(rect.size.x - size.x - 40, 40)
 	
-func _on_add_box(sender: level_grid2d, position: Vector2, box: Node):
+func _on_add_box(sender: LevelGrid2d, position: Vector2, box: Node):
 	if box == null:
 		_tile_layer.set_cell(Vector2i(position))
 		return
@@ -48,11 +48,11 @@ func _on_player_position_chaanged(sender, position: Vector2):
 	_player_layer.set_cell(Vector2i(position), 0, Vector2i(0, 0), Tile.PLAYER)
 	_last_player_position = position
 	
-func _on_map_set_tile(sender: level_grid2d, position: Vector2, tile: int):
+func _on_map_set_tile(sender: LevelGrid2d, position: Vector2, tile: int):
 	match tile:
-		level_const.Tile.WALL:
+		LevelConst.Tile.WALL:
 			_tile_layer.set_cell(Vector2i(position), 0, Vector2i(0, 0), Tile.WALL)
-		level_const.Tile.GOAL:
+		LevelConst.Tile.GOAL:
 			_goal_layer.set_cell(Vector2i(position), 0, Vector2i(0, 0), Tile.GOAL)
 	
 func copy_from(map):

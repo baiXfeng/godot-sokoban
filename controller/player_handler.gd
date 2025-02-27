@@ -1,25 +1,25 @@
-extends mvc_handler
+extends MVCHandler
 
 # override
-func _on_enter(a: mvc_app):
+func _on_enter(a: MVCApp):
 	a.add_callable("goto_level", _on_goto_level)
 	a.add_callable("exit_level", _on_exit_level)
 	a.add_callable("on_player_process", _on_player_process)
 	
 # override
-func _on_exit(a: mvc_app):
+func _on_exit(a: MVCApp):
 	a.remove_callable("goto_level", _on_goto_level)
 	a.remove_callable("exit_level", _on_exit_level)
 	a.remove_callable("on_player_process", _on_player_process)
 	
-func _on_goto_level(e: mvc_event):
+func _on_goto_level(e: MVCEvent):
 	Game.add_process("on_player_process")
 	
-func _on_exit_level(e: mvc_event):
+func _on_exit_level(e: MVCEvent):
 	Game.remove_process("on_player_process")
 	
-func _on_player_process(e: mvc_event):
-	var player: mvc_player = get_proxy("player")
+func _on_player_process(e: MVCEvent):
+	var player: MVCPlayer = get_proxy("player")
 	if player.data() == null:
 		return
 	

@@ -1,14 +1,14 @@
-extends mvc_handler
+extends MVCHandler
 
 # override
-func _on_enter(a: mvc_app):
+func _on_enter(a: MVCApp):
 	a.add_callable("pushbox", _pushbox)
 	
 # override
-func _on_exit(a: mvc_app):
+func _on_exit(a: MVCApp):
 	a.remove_callable("pushbox", _pushbox)
 	
-func _pushbox(e: mvc_event):
+func _pushbox(e: MVCEvent):
 	var player: Node3D = e.data.player
 	var box: Node3D = e.data.box
 	var dir: Vector2 = e.data.dir
@@ -18,7 +18,7 @@ func _pushbox(e: mvc_event):
 		return
 	
 	# 判断箱子前方是否有障碍
-	var box_grid: level_grid2d = get_proxy("box_map").data()
+	var box_grid: LevelGrid2d = get_proxy("box_map").data()
 	var curr_cell: Vector2 = box.get_cell()
 	var next_cell: Vector2 = curr_cell + dir
 	
@@ -28,8 +28,8 @@ func _pushbox(e: mvc_event):
 		return
 	
 	# 前方有墙壁
-	var room_grid: level_grid2d = get_proxy("room_map").data()
-	if room_grid.has_tile(next_cell) and room_grid.get_tile(next_cell) == level_const.Tile.WALL:
+	var room_grid: LevelGrid2d = get_proxy("room_map").data()
+	if room_grid.has_tile(next_cell) and room_grid.get_tile(next_cell) == LevelConst.Tile.WALL:
 		return
 	
 	# 更新箱子位置
@@ -37,7 +37,7 @@ func _pushbox(e: mvc_event):
 	box_grid.set_tile(next_cell, box)
 	
 	# 更新移动步数
-	var move_count: mvc_proxy = get_proxy("move_count")
+	var move_count: MVCProxy = get_proxy("move_count")
 	move_count.set_data( move_count.data() + 1 )
 	
 	# 箱子移动记录
@@ -64,9 +64,9 @@ func _pushbox(e: mvc_event):
 	player.on_pause()
 	
 	# 星级存档
-	var gd: game_data = get_proxy("game_data")
-	var current_map: mvc_proxy = get_proxy("current_map")
-	var current_level: mvc_proxy = get_proxy("current_level")
+	var gd: GameData = get_proxy("GameData")
+	var current_map: MVCProxy = get_proxy("current_map")
+	var current_level: MVCProxy = get_proxy("current_level")
 	gd.set_level_star(current_map.data(), current_level.data(), 3)
 	notify.call_deferred("save_game")
 	

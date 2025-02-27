@@ -1,13 +1,13 @@
-extends mvc_command
+extends MVCCommand
 
 # override
-func _on_execute(e: mvc_event):
+func _on_execute(e: MVCEvent):
 	# 获取存档数据
-	var gd: game_data = get_proxy("game_data")
+	var gd: GameData = get_proxy("GameData")
 	var data: Dictionary
 	gd.save(data)
 	
 	# 数据写入磁盘
-	if not JsonWriter.new(data, "user://game_data.save").successed():
+	if not JsonWriter.new(data, "user://GameData.save").successed():
 		print("存档写入失败!")
 	

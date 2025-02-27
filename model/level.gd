@@ -1,15 +1,15 @@
-extends mvc_proxy
-class_name mvc_level
+extends MVCProxy
+class_name MVCLevel
 	
 var _level_map: Dictionary
 var _level_max: int
 	
-func get_level(number: int) -> level_grid2d:
+func get_level(number: int) -> LevelGrid2d:
 	if not _level_map.has(number):
 		return null
 	return _level_map[number].get_grid()
 	
-func debug_print_level_data(number: int):
+func debug_print_LevelData(number: int):
 	if not _level_map.has(number):
 		return null
 	_level_map[number].debug_print()
@@ -28,7 +28,7 @@ func _init(path: String):
 		var line = f.get_line()
 		if line.find("#") != -1:
 			# 关卡开始
-			var data = level_data.new()
+			var data = LevelData.new()
 			index += 1
 			while true:
 				data.add_line(line)

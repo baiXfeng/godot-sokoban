@@ -1,5 +1,5 @@
 extends RefCounted
-class_name level_data
+class_name LevelData
 
 var _data: Array[String]
 
@@ -10,41 +10,41 @@ func debug_print():
 	for s in _data:
 		print(s)
 	
-func get_grid() -> level_grid2d:
-	var grid = level_grid2d.new()
+func get_grid() -> LevelGrid2d:
+	var grid = LevelGrid2d.new()
 	var size = _get_map_size()
 	
-	var FLOOR: int = level_const.Floor.unicode_at(0)
-	var BOX: int = level_const.Box.unicode_at(0)
-	var WALL: int = level_const.Wall.unicode_at(0)
-	var GOAL: int = level_const.Goal.unicode_at(0)
-	var PLAYER: int = level_const.Player.unicode_at(0)
-	var PLAYER_1: int = level_const.Player1.unicode_at(0)
-	var Tab: int = level_const.Tab.unicode_at(0)
+	var FLOOR: int = LevelConst.Floor.unicode_at(0)
+	var BOX: int = LevelConst.Box.unicode_at(0)
+	var WALL: int = LevelConst.Wall.unicode_at(0)
+	var GOAL: int = LevelConst.Goal.unicode_at(0)
+	var PLAYER: int = LevelConst.Player.unicode_at(0)
+	var PLAYER_1: int = LevelConst.Player1.unicode_at(0)
+	var Tab: int = LevelConst.Tab.unicode_at(0)
 	
 	grid.resize(size)
 	for y in size.y:
 		for x in size.x:
 			var line = _data[y]
 			if x >= line.length():
-				grid.set_tile(Vector2(x, y), level_const.Tile.FLOOR)
+				grid.set_tile(Vector2(x, y), LevelConst.Tile.FLOOR)
 				continue
 			var tile: int
 			match line.unicode_at(x):
 				FLOOR:
-					tile = level_const.Tile.FLOOR
+					tile = LevelConst.Tile.FLOOR
 				BOX:
-					tile = level_const.Tile.BOX
+					tile = LevelConst.Tile.BOX
 				WALL:
-					tile = level_const.Tile.WALL
+					tile = LevelConst.Tile.WALL
 				GOAL:
-					tile = level_const.Tile.GOAL
+					tile = LevelConst.Tile.GOAL
 				PLAYER:
-					tile = level_const.Tile.PLAYER
+					tile = LevelConst.Tile.PLAYER
 				PLAYER_1:
-					tile = level_const.Tile.PLAYER
+					tile = LevelConst.Tile.PLAYER
 				_:
-					tile = level_const.Tile.FLOOR
+					tile = LevelConst.Tile.FLOOR
 			grid.set_tile(Vector2(x, y), tile)
 	return grid
 	

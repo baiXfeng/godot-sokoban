@@ -24,8 +24,8 @@ func _ready() -> void:
 func _reload_level_list():
 	for node in _grid_container.get_children() as Array[Node]:
 		node.queue_free()
-	var level: mvc_level = Game.app.get_proxy(_list[_index])
-	var gd: game_data = Game.app.get_proxy("game_data")
+	var level: MVCLevel = Game.app.get_proxy(_list[_index])
+	var gd: GameData = Game.app.get_proxy("GameData")
 	var max_level: int = gd.get_level_max(_list[_index])
 	for i in level.get_level_max():
 		var view = button_class.instantiate()

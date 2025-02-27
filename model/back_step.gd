@@ -1,5 +1,5 @@
 extends RefCounted
-class_name back_step
+class_name BackStep
 
 # 箱子移动记录
 var from_cell: Vector2

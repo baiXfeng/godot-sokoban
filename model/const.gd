@@ -1,5 +1,5 @@
 extends RefCounted
-class_name level_const
+class_name LevelConst
 
 enum Tile {
 	NONE = 0,
